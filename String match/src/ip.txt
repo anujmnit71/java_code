@@ -1,0 +1,7 @@
+3
+ABABAC
+BCBAABACAABABACAA
+aabaaaba
+ccaabaabaabaaabaab
+aabaaabb
+ccaabaabaabaaabaab
