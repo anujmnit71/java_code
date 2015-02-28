@@ -1,0 +1,33 @@
+Printing the file passed in:
+result of test 1is 26
+result of test 0is 19
+Printing the file passed in:
+result of test 1 is 26
+result of test 0 is 19
+Printing the file passed in:
+result of test 1 is 26
+result of test 0 is 19
+Printing the file passed in:
+result of test 1 is -3
+result of test 0 is 19
+Printing the file passed in:
+result of test 1 is -3
+result of test 0 is -1
+Printing the file passed in:
+result of test 1 is 12
+result of test 0 is 6
+Printing the file passed in:
+result of test 1 is 15
+result of test 0 is 11
+Printing the file passed in:
+result of test 1 is -1
+result of test 0 is 2
+Printing the file passed in:
+result of test 1 is -1
+result of test 0 is 2
+Printing the file passed in:
+result of test 1 is -1 count is 3
+result of test 0 is 2 count is 7
+Printing the file passed in:
+result of test 1 is -1 count is 3
+result of test 0 is 4 count is 3
