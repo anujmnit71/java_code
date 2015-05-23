@@ -1,1 +1,3 @@
-/ll_demo/
+bin/
+.classpath
+*.class
