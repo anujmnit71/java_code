@@ -1,0 +1,36 @@
+Parent is 0 rank is 2
+Parent is 0 rank is 2
+Parent is 3 rank is 2
+Parent is 3 rank is 2
+Parent is 6 rank is 2
+Parent is 0 rank is 2
+Parent is 0 rank is 2
+Parent is 3 rank is 2
+Parent is 3 rank is 2
+Parent is 3 rank is 2
+Path length to root 
+Paht of vertex 0
+0
+Paht of vertex 1
+1
+0
+Paht of vertex 2
+2
+0
+Paht of vertex 3
+3
+Paht of vertex 4
+4
+3
+Paht of vertex 5
+5
+3
+Paht of vertex 6
+6
+Paht of vertex 7
+7
+6
+Paht of vertex 8
+8
+Paht of vertex 9
+9

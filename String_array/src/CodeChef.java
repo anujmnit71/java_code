@@ -42,7 +42,7 @@ class CodeChef {
 		Vector<Vector<Integer> > vforf = new Vector<Vector<Integer> >();
 		
  		for(int i = 0 ; i < str.length() ; i++){
-			mymap.put(str.charAt(i), arg1)
+			//mymap.put(str.charAt(i), arg1)
 		}
 	}
 

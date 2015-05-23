@@ -71,7 +71,7 @@ class UnionFind{
 		
 		
 		if(v1_root.rank == v2_root.rank){
-			v1_root.rank = v2_root.rank = v2_root.rank + 1;
+			v1_root.rank = v2_root.rank + 1;
 			v2_root.parent = v1_root;
 			root = v1_root;
 		}
