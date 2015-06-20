@@ -22,7 +22,7 @@ class Pair<L,R> extends java.lang.Object{
     
     public void setR(R r){ this.r = r; }
     
-    public boolean equals(Pair that){
+    public boolean equals(Pair<?, ?> that){
     	if(this.l == that.l && this.r == that.r)
     		return true;
     	else
