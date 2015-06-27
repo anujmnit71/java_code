@@ -1,0 +1,11 @@
+{
+  "C:\\Program Files (x86)\\Java\\jre7\\lib\\rt.jar": {
+    "location": "C:\\Program Files (x86)\\Java\\jre7\\lib\\rt.jar",
+    "status": "UNRESOLVED"
+  },
+  "C:\\Users\\anuj_k_verma\\java workspace\\String_array\\src": {
+    "location": "C:\\Users\\anuj_k_verma\\java workspace\\String_array\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\anuj_k_verma\\java workspace\\String_array\\src\u0027. Skipped."
+  }
+}
