@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring accessors="true" comment="Delete 4 elements from project &apos;Notes&apos;&#x0D;&#x0A;- Original project: &apos;Notes&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Notes/src/(default package)&#x0D;&#x0A;     aldemo.java&#x0D;&#x0A;     HashMapDemo.java&#x0D;&#x0A;     scanner_demo.java" description="Delete elements" element1="/src&lt;" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1412095330192" subPackages="false" version="1.0"/>
-</session>

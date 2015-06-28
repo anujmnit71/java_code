@@ -1,2 +1,0 @@
-http://www.architexa.com/rdf/rse-eclipseProj#Backtracking->http://www.architexa.com/rdf/jdt-wkspc#(default).*;
-http://www.architexa.com/rdf/jdt-wkspc#(default).*->http://www.architexa.com/rdf/jdt-wkspc#(default);

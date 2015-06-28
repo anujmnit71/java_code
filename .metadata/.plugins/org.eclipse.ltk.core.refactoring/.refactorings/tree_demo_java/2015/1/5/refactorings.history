@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;zigzagTravesal.java&apos; to &apos;TreeHeight.java&apos;&#x0D;&#x0A;- Original project: &apos;tree_demo_java&apos;&#x0D;&#x0A;- Destination element: &apos;TreeHeight.java&apos;&#x0D;&#x0A;- Original element: &apos;zigzagTravesal.java&apos;" description="Copy compilation unit" destination="/src&lt;{TreeHeight.java" element1="/src&lt;{zigzagTravesal.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1422634917865" units="1" version="1.0"/>
-</session>
