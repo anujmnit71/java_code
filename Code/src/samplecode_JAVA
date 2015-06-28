@@ -1,0 +1,40 @@
+package src;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
+/*
+ Demonstrates using individual lock objects with the
+ synchronized(lock) {...} form instead of synchronizing methods --
+ allows finer grain in the locking.
+*/
+
+public class Code {
+  
+	public static void main(String[] args) throws FileNotFoundException {
+		File f = new File("src/ipCode");
+		FileReader fr = new FileReader(f);
+		Scanner scan = new Scanner(f);
+		int test  = scan.nextInt();
+		scan.nextLine();
+		while(test>0 ){
+			String line = scan.nextLine();
+			char[] elements = line.toCharArray();
+			int[] arrint = new int[elements.length];
+			int i = 0;
+			for(char ch : elements){
+				System.out.print(ch + "  ");
+				arrint[i] = ch;
+				i++;
+			}
+            test--;
+            System.out.println();
+		} 
+    }
+}
+
+2
+1 2 3 4
+3 2 4 1
