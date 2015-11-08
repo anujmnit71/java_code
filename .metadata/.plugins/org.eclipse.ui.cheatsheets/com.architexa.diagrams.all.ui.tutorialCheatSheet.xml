@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<compositeCheatSheetState id="com.architexa.diagrams.all.ui.tutorialCheatSheet">
+<task id="TaskId_0" state="0"/>
+<task id="createLayeredDiagram" state="0"/>
+<task id="createClassDiagram" state="0"/>
+<task id="createSequenceDiagram" state="0"/>
+<layout key="selectedTask" value="TaskId_0"/>
+</compositeCheatSheetState>

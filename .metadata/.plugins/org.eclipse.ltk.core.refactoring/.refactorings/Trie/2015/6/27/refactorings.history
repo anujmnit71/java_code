@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;buildUnionFind&apos; to &apos;Trie&apos;&#x0D;&#x0A;- Original project: &apos;Trie&apos;&#x0D;&#x0A;- Original element: &apos;buildUnionFind&apos;&#x0D;&#x0A;- Renamed element: &apos;Trie&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;buildUnionFind&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{buildUnionFind.java[buildUnionFind" matchStrategy="1" name="Trie" qualified="false" references="true" similarDeclarations="false" stamp="1435670591243" textual="false" version="1.0"/>
+</session>

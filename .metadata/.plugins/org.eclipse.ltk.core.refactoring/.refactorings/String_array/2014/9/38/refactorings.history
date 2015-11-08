@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;duplicate_find.java&apos; to &apos;duplicate_find.java&apos;&#x0D;&#x0A;- Original project: &apos;String_array&apos;&#x0D;&#x0A;- Destination element: &apos;duplicate_find.java&apos;&#x0D;&#x0A;- Original element: &apos;duplicate_find.java&apos;" description="Copy compilation unit" destination="/src&lt;{duplicate_find.java" element1="/src&lt;{duplicate_find.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1410775901847" units="1" version="1.0"/>
+</session>
