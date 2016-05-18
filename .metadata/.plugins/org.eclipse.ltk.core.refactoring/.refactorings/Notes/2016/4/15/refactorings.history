@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Notes/src/ipLeetCode&apos; to &apos;ip&apos;" description="Rename resource &apos;ipLeetCode&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/ipLeetCode" name="ip" stamp="1460185356130" updateReferences="true"/>
+</session>

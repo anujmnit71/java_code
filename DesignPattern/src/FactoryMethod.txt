@@ -1,0 +1,139 @@
+// Test.java
+package example;
+
+public class FactoryMethodSample{
+
+	public static void prepareEmployeeForTraver(Employee employee){
+		employee.getReadyForTravel();
+		
+	}
+	public static void main(String[] args){
+		Emloyee developer  = new Developer();
+		prepareEmployeeForTraver(developer);
+		
+		SalesExecutive sales = new SalesExecutive();
+		prepareEmployeeForTraver(sales);
+	}
+}
+
+
+//Employee.java
+public abstract class Employee{
+	protected FlightBooking _FlightRes;
+	protected HotelBooking _HotelRes;
+	protected CarBooking _car;
+	
+	
+	// this method relies on subclass for the implementation of these methods as it does not know what type of Employee it might 
+	// represent at run time 
+	public void getReadyForTravel(){
+		_HotelRes 	= bookFlight();
+		_FlightRes 	= bookHotel();
+		_car		= bookCar();
+	}
+	
+	
+	public abstract FlightBooking bookFlight();
+	public abstract HotelBooking bookHotel();
+	public abstract CarBooking bookCar();
+	
+	@Override
+	public String toString(){
+		return String.format("%s	%s	 %s		%s" , getClass() , _FlightRes , _HotelRes , _car);
+	}
+}
+
+//Developer.java
+public class Developer extends Employee{
+	@Override
+	public FlightBooking bookFlight(){
+		return new EconomyFlightBooking();
+	}
+	@Override
+	public HotelBooking bookHotel(){
+		return new EconomyHotelBooking();
+	}
+	@Override
+	public CarBooking bookCar(){
+		return new EconomyCarBooking();
+	}
+}
+
+//SalesExecutive.java
+public class SalesExecutive extends Employee{
+	@Override
+	public FlightBooking bookFlight(){
+		return new ExecFlightBooking();
+	}
+	@Override
+	public HotelBooking bookHotel(){
+		return new ExecHotelBooking();
+	}
+	@Override
+	public CarBooking bookCar(){
+		return new ExecCarBooking();
+	}
+}
+//FlightBooking.java
+public abstract class FlightBooking{
+}
+
+//HotelBooking.java
+public abstract class HotelBooking{
+}
+
+//CarBooking.java
+public abstract class CarBooking{
+}
+
+{
+//EconomyFlightBooking.java
+public class EconomyFlightBooking extends FlightBooking{
+	@Override
+	public String toString(){
+		return String.format("Economy Flight");
+	}
+}
+
+//EconomyHotelBooking.java
+public class EconomyHotelBooking extends HotelBooking{
+	@Override
+	public String toString(){
+		return String.format("3 * Hotel");
+	}
+}
+
+//EconomyCarBooking.java
+public class EconomyCarBooking extends CarBooking{
+	@Override
+	public String toString(){
+		return String.format("By EconomyCarBooking");
+	}
+}
+
+
+//ExecFlightBooking.java
+public class ExecFlightBooking extends FlightBooking{
+	@Override
+	public String toString(){
+		return String.format("Executive Flight");
+	}
+}
+
+//ExecHotelBooking.java
+public class ExecHotelBooking extends HotelBooking{
+	@Override
+	public String toString(){
+		return String.format("5 * Hotel");
+	}
+}
+
+//ExecCarBooking.java
+public class ExecCarBooking extends CarBooking{
+	@Override
+	public String toString(){
+		return String.format("By Luxury Car");
+	}
+}
+
+}

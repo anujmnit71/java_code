@@ -1,0 +1,108 @@
+import static org.junit.Assert.assertEquals;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+
+class Producer implements Runnable {
+	private final BlockingQueue<Object> SharedQueue;
+	Producer(BlockingQueue pipeline){
+		SharedQueue = pipeline;
+	}
+	
+	@Override
+	public void run() {
+		try {
+				for(int i=0 ; i < 10 ; i++ )
+					SharedQueue.put(i);
+			} catch (InterruptedException e) {
+				Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, e);
+			}
+	}
+
+}
+
+class Consumer implements Runnable {
+	private final BlockingQueue<Object> SharedQueue;
+	Consumer(BlockingQueue pipeline){
+		SharedQueue = pipeline;
+	}
+	
+	@Override
+	public void run() {
+		int val=0;
+		while(true){
+			val = (int) SharedQueue.poll();
+			Logger.getLogger(Consumer.class.getName()).log(Level.INFO, "Consumed == " + val);
+	}
+
+}
+
+
+public static class ProducerConsumerTestWithBlockingQueue{
+	private static Logger logger =  Logger.getLogger(ProducerConsumerTestWithBlockingQueue.class.getName());
+	static ProducerConsumerTestWithBlockingQueue test;
+	BlockingQueue<Integer> sharedqueue;
+	@BeforeClass
+    public void oneTimeSetUp() {
+		SimpleFormatter fmt = new SimpleFormatter();
+		StreamHandler handler = new StreamHandler(System.out, fmt);
+		logger.addHandler(handler);
+		handler.setLevel(Level.ALL);
+		logger.setLevel(Level.ALL);
+		logger.log(Level.SEVERE,"@BeforeClass - oneTimeSetUp");
+		sharedqueue = new LinkedBlockingQueue<>();
+    	
+    }
+
+    @AfterClass
+    public static void oneTimeTearDown() {
+        // one-time cleanup code
+    	logger.log(Level.FINE,"@AfterClass - oneTimeTearDown");
+    }
+
+    @Before
+    public void setUp() {
+        logger.log(Level.FINE,"@Before - setUp");
+    }
+
+    @After
+    public void tearDown() {
+        logger.log(Level.FINE,"@After - tearDown");
+    }
+
+    @Test
+    public void test100() throws InterruptedException {
+        logger.log(Level.FINE,"@Test - test for 100 entries");
+        //Creating Producer and Consumer Thread
+        Producer p = new Producer(sharedqueue);
+    	Consumer c = new Consumer(sharedqueue);
+        
+        Thread prodThread = new Thread(p);
+        Thread consThread = new Thread(c);
+
+        //Starting producer and Consumer thread
+        prodThread.start();
+        consThread.start();
+    }
+
+    @Ignore
+    @Test
+    public void test100000() throws InterruptedException {
+        }
+    }
+}
+

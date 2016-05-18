@@ -1,0 +1,183 @@
+import static org.junit.Assert.assertEquals;
+
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+
+class OddEvenThread {
+
+	public void fillArray(int[] numarr ,int l) throws InterruptedException {
+		// shared class object
+		SharedPrinter sp = new SharedPrinter();
+		int limit = l;
+		// creating two threads
+		Thread t1 = new Thread(new EvenNumProducer(sp, numarr , limit) , "even");
+		Thread t2 = new Thread(new OddNumProducer(sp, numarr , limit) , "odd");
+		// starting threads
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+	}
+
+}
+
+// Shared class used by both threads
+class SharedPrinter{
+	boolean evenFlag = false;
+	boolean oddFlag = true;
+	//Method for printing even numbers
+	public void printEvenNum(int[] numarr , int num){
+		synchronized (this) {
+			// While condition as mandated to avoid spurious wakeup
+			while(!evenFlag){
+				try {
+					//asking current thread to give up lock
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			numarr[num] = num;
+			evenFlag = false;
+			oddFlag = true;
+			// Wake up thread waiting on this monitor(lock)
+			notify();
+
+		}
+
+	}
+
+	//Method for printing odd numbers
+	public void printOddNum(int[] numarr , int num){
+		synchronized (this) {
+			// While condition as mandated to avoid spurious wakeup
+			while(!oddFlag){
+				try {
+					//asking current thread to give up lock
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			numarr[num] = num;
+			oddFlag = false;
+			evenFlag = true;
+			// Wake up thread waiting on this monitor(lock)
+			notify();
+
+		}
+	}
+}
+
+// Thread Class generating Even numbers
+class EvenNumProducer implements Runnable{
+	SharedPrinter sp;
+	int limit;
+	int[] numarr;
+	EvenNumProducer(SharedPrinter sp,int[] num , int limit){
+		this.sp = sp;
+		this.limit = limit;
+		numarr = num;
+	}
+	@Override
+	public void run() {
+		for(int i = 2; i <= limit; i = i+2){
+			sp.printEvenNum(numarr, i);
+		}
+
+	}
+
+}
+
+//Thread Class generating Odd numbers
+class OddNumProducer implements Runnable{
+	SharedPrinter sp;
+	int limit;
+	int[] numarr;
+	OddNumProducer(SharedPrinter sp, int[] num , int limit){
+		this.sp = sp;
+		this.limit = limit;
+		numarr = num;
+	}
+	@Override
+	public void run() {
+		for(int i = 1; i <= limit; i = i+2){
+			sp.printOddNum(numarr , i);
+		}
+	}
+}
+
+
+public class OddEvenThreadTest{
+	private static Logger logger =  Logger.getLogger("OddEvenThreadTest");
+	static OddEvenThread OddEven;
+	
+
+	
+	@BeforeClass
+    public static void oneTimeSetUp() {
+        // one-time initialization code
+		
+		ConsoleHandler handler = new ConsoleHandler();
+		handler.setFormatter(new SimpleFormatter());
+		
+		logger.addHandler(handler);
+		handler.setLevel(Level.INFO);
+		logger.setLevel(Level.ALL);
+		logger.log(Level.FINE,"@BeforeClass - oneTimeSetUp");
+    	OddEven = new OddEvenThread();
+    	
+    }
+
+    @AfterClass
+    public static void oneTimeTearDown() {
+        // one-time cleanup code
+    	logger.log(Level.FINE,"@AfterClass - oneTimeTearDown");
+    }
+
+    @Before
+    public void setUp() {
+        logger.log(Level.FINE,"@Before - setUp");
+    }
+
+    @After
+    public void tearDown() {
+        logger.log(Level.FINE,"@After - tearDown");
+    }
+
+    @Test
+    public void test100() throws InterruptedException {
+        logger.log(Level.FINE,"@Test - test for 100 entries");
+        int limit=100 ;
+        int[] numarr = new int[limit+1];
+        OddEven.fillArray(numarr, limit);
+        for(int i=1 ; i<=limit ; i++){
+        	assertEquals(true, numarr[i] == i);
+        }
+    }
+
+    @Test
+    public void test100000() throws InterruptedException {
+        logger.log(Level.FINE,"@Test - testOneItemCollection");
+        int limit= 10000;
+        int[] numarr = new int[limit+1];
+        OddEven.fillArray(numarr, limit);
+        for(int i=1 ; i<=limit ; i++){
+        	assertEquals(true, numarr[i] == i);
+        }
+    }
+}
+

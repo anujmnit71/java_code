@@ -1,0 +1,88 @@
+import static org.junit.Assert.*;
+
+import java.io.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.junit.*;
+
+class Singleton implements java.io.Serializable {
+	public static Singleton INSTANCE = new Singleton();
+	private Singleton() {
+		// Exists only to thwart instantiation.
+	}
+	private Object readResolve() {
+		return INSTANCE;
+	}
+}
+
+//Using Junit 4 so no need to extend TestCase
+public class JunitLog4jDemo{
+	//static Logger log = Logger.getRootLogger();
+	//private static Logger logger = Logger.getLogger(SingletonTest.class.getName());
+	private static final Logger logger = LogManager.getLogger(JunitLog4jDemo.class.getName());
+	//execute before class 
+	@BeforeClass 
+	public static void beforeClass() { 
+		logger.info("in before class"); 
+	} 
+
+	//execute after class 
+	@AfterClass 
+	public static void afterClass() { 
+		logger.info("in after class");
+	}
+	
+	//public void setUp() {
+	//}
+	@Test
+	public void testSerialize() {
+		logger.info("testing singleton serialization...");
+		writeSingleton();
+		Singleton s1 = readSingleton();
+		Singleton s2 = readSingleton();
+		assertEquals(true, s1 == s2);
+	}
+	private void writeSingleton() {
+		try {
+			FileOutputStream fos = new FileOutputStream("serializedSingleton");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(Singleton.INSTANCE);
+			oos.flush();
+		}
+		catch(NotSerializableException se) {
+			logger.fatal("Not Serializable Exception: " + se.getMessage());
+		}
+		catch(IOException iox) {
+			logger.fatal("IO Exception: " + iox.getMessage());
+		}
+	}
+	private Singleton readSingleton() {
+		Singleton s = null;
+		try {
+			FileInputStream fis = new FileInputStream("serializedSingleton");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			s = (Singleton)ois.readObject();
+		}
+		catch(ClassNotFoundException cnf) {
+			logger.fatal("Class Not Found Exception: " + cnf.getMessage());
+		}
+		catch(NotSerializableException se) {
+			logger.fatal("Not Serializable Exception: " + se.getMessage());
+		}
+		catch(IOException iox) {
+			logger.fatal("IO Exception: " + iox.getMessage());
+		}
+		return s;
+	}
+
+	//@Ignore
+	@Test
+	public void testUnique() {
+		logger.info("testing singleton uniqueness...");
+		Singleton sone = Singleton.INSTANCE;
+		Singleton stwo = Singleton.INSTANCE;
+		logger.info("checking singletons for equality");
+		assertEquals(true, sone == stwo);
+	}
+}

@@ -1,0 +1,103 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+class Singleton implements java.io.Serializable {
+	public static Singleton singleton;
+	private final static Object lock = new Object(); // private final lock object
+	protected Singleton() {
+		// Exists only to thwart instantiation.
+	}
+	public static Singleton getInstance() {
+		if(singleton == null) {
+			synchronized (lock) { // Locks on the private Object
+				if(singleton == null) {
+					singleton = new Singleton();
+				}
+			}
+		}
+		return singleton;
+	}
+	
+	//to protect from Serialization
+	private Object readResolve() {
+		return singleton;
+	}
+	
+	// to protect from several classloaders use your own class loader
+	private static Class getClass(String classname) throws ClassNotFoundException {
+      ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+      if(classLoader == null)
+         classLoader = Singleton.class.getClassLoader();
+      return (classLoader.loadClass(classname));
+   }
+}
+
+public class SingletonTest extends TestCase {
+	private Singleton sone = null, stwo = null;
+	private static Logger logger =  LogManager.getLogger("SingletonTest");
+	public SingletonTest(String name) {
+		super(name);
+	}
+	@Override
+	public void setUp() {
+		sone = Singleton.getInstance();
+		stwo = Singleton.getInstance();
+	}
+	public void testSerialize() {
+		logger.info("testing singleton serialization...");
+		writeSingleton();
+		Singleton s1 = readSingleton();
+		Singleton s2 = readSingleton();
+		Assert.assertEquals(true, s1 == s2);
+	}
+	private void writeSingleton() {
+		try {
+			FileOutputStream fos = new FileOutputStream("serializedSingleton");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			Singleton s = Singleton.getInstance();
+			oos.writeObject(s);
+			oos.flush();
+		}
+		catch(NotSerializableException se) {
+			logger.fatal("Not Serializable Exception: " + se.getMessage());
+		}
+		catch(IOException iox) {
+			logger.fatal("IO Exception: " + iox.getMessage());
+		}
+	}
+	private Singleton readSingleton() {
+		Singleton s = null;
+		try {
+			FileInputStream fis = new FileInputStream("serializedSingleton");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			s = (Singleton)ois.readObject();
+		}
+		catch(ClassNotFoundException cnf) {
+			logger.fatal("Class Not Found Exception: " + cnf.getMessage());
+		}
+		catch(NotSerializableException se) {
+			logger.fatal("Not Serializable Exception: " + se.getMessage());
+		}
+		catch(IOException iox) {
+			logger.fatal("IO Exception: " + iox.getMessage());
+		}
+		return s;
+	}
+	public void testUnique() {
+		logger.info("testing singleton uniqueness...");
+		Singleton another = new Singleton();
+		logger.info("checking singletons for equality");
+		Assert.assertEquals(true, sone == stwo);
+	}
+}

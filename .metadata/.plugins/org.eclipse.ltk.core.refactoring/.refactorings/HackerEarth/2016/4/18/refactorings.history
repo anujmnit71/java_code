@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ReverseShuffleMerge.java&apos; to &apos;ReverseShuffleMerge.java&apos;&#x0D;&#x0A;- Original project: &apos;HackerEarth&apos;&#x0D;&#x0A;- Destination element: &apos;ReverseShuffleMerge.java&apos;&#x0D;&#x0A;- Original element: &apos;ReverseShuffleMerge.java&apos;" description="Copy compilation unit" destination="/src&lt;{ReverseShuffleMerge.java" element1="/src&lt;{ReverseShuffleMerge.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1462018754656" units="1" version="1.0"/>
+</session>
